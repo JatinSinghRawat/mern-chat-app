@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";// to get the PORT value or others from .env file
 import cookieParser from "cookie-parser";
+import cors from 'cors'
 
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
@@ -15,6 +16,12 @@ dotenv.config();// to get the PORT value or others from .env file
  
 app.use(express.json());//allows us to extract req.body from auth.controller.js(to parse the incoming request with JSON payload(from req.body))
 app.use(cookieParser());//to parse the incoming cookies from req.body
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods:['GET','POST','PUT','DELETE'],
+  allowedHeaders:['Content-Type','Authorization'],
+  credentials:true
+}))
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoutes);

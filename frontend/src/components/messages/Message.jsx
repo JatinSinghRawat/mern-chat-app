@@ -1,15 +1,27 @@
+import {useAuthContext} from '../../Context/AuthContext.jsx'
+import { extractTime } from '../../utils/extractTime.js';
+import useConversation from '../../zustand/useConversation.js';
 
-const Message = () => {
-    return <div className="chat chat-end">
+const Message = ({message}) => {
+    const {authUser} = useAuthContext();
+    const {selectedConversation} = useConversation();
+    const fromMe = message.senderId === authUser._id;
+    const fromattedTime = extractTime(message.createdAt)
+    const chatClassName = fromMe? 'chat-end' : 'chat-start';
+    const profilePic = fromMe? authUser.profilePic : selectedConversation?.profilePic;
+    const bubbleBgColor = fromMe? 'bg-blue-500' : 'bg-gray-500';
+
+
+    return <div className={`chat ${chatClassName}`}>
         <div className="chat-image avatar">
             <div className="w-10 rounded-full">
                 <img 
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" 
+                src={profilePic} 
                 alt="user avatar"/>
             </div>
         </div>
-        <div className="chat-bubble text-white bg-blue-500">Hi What's app?</div>
-        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">12:42</div>
+        <div className={`chat-bubble text-white ${bubbleBgColor} pb-1`}>{message.message}</div>
+        <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">{fromattedTime}</div>
     </div>;
 }
 

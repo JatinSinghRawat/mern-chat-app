@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+/* Ensure toast container is visible */
+#root {
+    position: relative;
+    z-index: 1000;
+}
+  
+
 body{
     background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url('/bg.png');
     background-repeat: repeat;

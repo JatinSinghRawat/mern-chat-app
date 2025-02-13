@@ -3,7 +3,7 @@ import dotenv from "dotenv";// to get the PORT value or others from .env file
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 import path from 'path'
-import connecToMongoDB from "./db/connectToMongoDb.js";
+import connecToMongoDB from "./db/connectToMongoDB.js";
 
 
 

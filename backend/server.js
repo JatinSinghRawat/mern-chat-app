@@ -23,7 +23,7 @@ dotenv.config();// to get the PORT value or others from .env file
 app.use(express.json());//allows us to extract req.body from auth.controller.js(to parse the incoming request with JSON payload(from req.body))
 app.use(cookieParser());//to parse the incoming cookies from req.body
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origins: ['http://localhost:3000','https://convo-nqz6.onrender.com'],
   methods:['GET','POST','PUT','DELETE'],
   allowedHeaders:['Content-Type','Authorization'],
   credentials:true

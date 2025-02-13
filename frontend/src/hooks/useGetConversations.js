@@ -18,7 +18,7 @@ const useGetConversations = () => {
                     throw new Error("Unauthorized! Please log in again.");
                 }
 
-                const res = await fetch("http://localhost:5000/api/users", {
+                const res = await fetch("/api/users", {
                     method: "GET",
                     credentials: "include", // Include cookies if needed
                     headers: { 

@@ -13,7 +13,7 @@ const useLogin = () => {
         }
         setLoading(true)
         try {
-            const res = await fetch("http://localhost:5000/api/auth/login",{
+            const res = await fetch("/api/auth/login",{
                 method:'POST',
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({userName,password}),
@@ -37,7 +37,6 @@ const useLogin = () => {
             localStorage.setItem("chat-user", JSON.stringify(userData));
             setAuthUser(userData);
             toast.success("Login successful!");
-            window.location.reload(); // Refresh to apply token
 
         } catch (error) {
             toast.error(error.message)

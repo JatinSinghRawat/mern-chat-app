@@ -6,10 +6,10 @@ import path from 'path'
 import connecToMongoDB from "./db/connectToMongoDb.js";
 
 
+
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
 import userRoutes from "./routes/user.route.js"
-import connecToMongoDB from "./db/connectToMongoDb.js";
 import {app, server} from './socket/socket.js'
 
 const PORT = process.env.PORT || 5000;

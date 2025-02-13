@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useSocketContext } from "../Context/SocketContext";
+
 
 const useLogout = () => {
     const [loading,setLoading] = useState(false);
     const {setAuthUser} = useAuthContext()
+    const { socket, setOnlineUsers } = useSocketContext();
 
     const logout = async () => {
         setLoading(true)
@@ -17,8 +20,15 @@ const useLogout = () => {
             if(data.error){
                 throw new Error(data.error)
             }
-            localStorage.removeItem("chat-user")
+
+            if (socket) {
+                socket.disconnect();
+            }
+
+
+            localStorage.removeItem("chat-user");
             setAuthUser(null)
+            setOnlineUsers([]);
         } catch (error) {
             toast.error(error.message)
         }

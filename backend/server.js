@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";// to get the PORT value or others from .env file
 import cookieParser from "cookie-parser";
 import cors from 'cors'
+import path from 'path'
 
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
@@ -10,6 +11,8 @@ import connecToMongoDB from "./db/connectToMongoDb.js";
 import {app, server} from './socket/socket.js'
 
 const PORT = process.env.PORT || 5000;
+
+const __dirname = path.resolve();
 
 
 
@@ -28,11 +31,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoutes);
 app.use("/api/users",userRoutes);
 
+app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
-// app.get("/", (req,res) => {
-//   //root route https://localhost:5000/
-//   res.send("HelloME");
-// });
+
+app.get("*", (req,res) => {
+  res.sendFile(path.join(__dirname,"frontend","dist","index.html"))
+})
 
 
 server.listen(PORT, () => {

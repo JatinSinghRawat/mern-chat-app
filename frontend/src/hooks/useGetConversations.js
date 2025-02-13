@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../Context/AuthContext";
 
 const useGetConversations = () => {
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState([]);
+    const {authUser} = useAuthContext();
 
     useEffect(() => {
         const getConversations = async () => {
@@ -38,7 +40,7 @@ const useGetConversations = () => {
         };
 
         getConversations();
-    }, []); // ✅ No token dependency needed
+    }, [authUser]); // ✅ No token dependency needed
 
     return { loading, conversations };
 };

@@ -11,9 +11,7 @@ const useSendMessage = () => {
         setLoading(true)
 
         const user = JSON.parse(localStorage.getItem("chat-user"));
-        console.log("User form localStorage",user)
         const token = user?.token;
-        console.log("Extracted Token:",token)
 
         if (!token) {
             toast.error("Unauthorized! Please log in again.");
